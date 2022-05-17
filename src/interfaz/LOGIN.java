@@ -10,17 +10,27 @@ package interfaz;
  * @author yanyg
  */
 import Clases.Manzana;
+import Clases.Panes;
 import java.util.*;
 import javax.swing.*;
 import java.awt.*;
 public class LOGIN extends javax.swing.JFrame {
     public ImageIcon imagen;
     public Icon icono;
-    ArrayList <Manzana> listaFruta = new ArrayList<>();
+    ArrayList <Manzana> listaAlimentos = new ArrayList<>();
+    //aqui inserte los nombres de los demas alimentos, porque recuerda que pueden haber de difernetes formas, sabores y presentaciones
     public LOGIN() {
         initComponents();
+        pintarImagen(lblFondo,"C:\\Users\\yanyg\\OneDrive\\Documentos\\NetBeansProjects\\POO-Transferencia\\src\\imagenes\\ucomfondo.jpg");
+        pintarImagen(lblIcono,"C:\\Users\\yanyg\\OneDrive\\Documentos\\NetBeansProjects\\POO-Transferencia\\src\\imagenes\\compensar.png");
     }
-
+    public void pintarImagen(JLabel label, String ruta){
+        imagen=new ImageIcon(ruta);
+        icono=new ImageIcon(imagen.getImage().getScaledInstance(label.getWidth(), 
+                label.getHeight(), Image.SCALE_DEFAULT));
+        label.setIcon(this.icono);
+        this.repaint();
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -30,21 +40,119 @@ public class LOGIN extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        jPanel1 = new javax.swing.JPanel();
+        lblIcono = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        txtUsuario = new javax.swing.JTextField();
+        jPassword = new javax.swing.JPasswordField();
+        jSeparator1 = new javax.swing.JSeparator();
+        jSeparator2 = new javax.swing.JSeparator();
+        lblLogin = new javax.swing.JButton();
+        lblFondo = new javax.swing.JLabel();
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(255, 255, 255));
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblIcono, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
+                .addContainerGap())
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(71, 71, 71)
+                .addComponent(lblIcono, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(87, Short.MAX_VALUE))
         );
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 190, 310));
+
+        jLabel1.setFont(new java.awt.Font("Roboto Black", 0, 12)); // NOI18N
+        jLabel1.setText("CONTRASEÑA");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 140, -1, -1));
+
+        jLabel2.setFont(new java.awt.Font("Roboto Black", 0, 12)); // NOI18N
+        jLabel2.setText("USUARIO");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 50, -1, -1));
+
+        txtUsuario.setFont(new java.awt.Font("Roboto Light", 0, 11)); // NOI18N
+        txtUsuario.setText("Ingrese su nombre de usuario");
+        txtUsuario.setBorder(null);
+        txtUsuario.setMargin(new java.awt.Insets(1, 1, 1, 1));
+        txtUsuario.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtUsuarioMouseClicked(evt);
+            }
+        });
+        getContentPane().add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 70, 220, 20));
+
+        jPassword.setText("jPasswordField1");
+        jPassword.setBorder(null);
+        jPassword.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jPasswordActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 160, 220, -1));
+        getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 180, 240, 10));
+        getContentPane().add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 90, 240, 10));
+
+        lblLogin.setBackground(new java.awt.Color(255, 153, 51));
+        lblLogin.setFont(new java.awt.Font("Roboto Black", 0, 12)); // NOI18N
+        lblLogin.setText("LOG IN");
+        lblLogin.setBorder(null);
+        lblLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                lblLoginActionPerformed(evt);
+            }
+        });
+        getContentPane().add(lblLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 240, 130, 30));
+        getContentPane().add(lblFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, -20, 430, 330));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void lblLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lblLoginActionPerformed
+        //String usuario="sebastian872";
+        //String contraseña="poo2022";
+        String usuario="s2";
+        String contraseña="22";
+        String pass = new String(jPassword.getPassword());
+        if(txtUsuario.getText().equals(usuario)|| pass.equals(contraseña)){
+            if(txtUsuario.getText().equals(usuario) && !pass.equals(contraseña)){
+                JOptionPane.showMessageDialog(rootPane, "Contraseña incorrecto");
+            }
+            if(!txtUsuario.getText().equals(usuario) && pass.equals(contraseña)){
+                JOptionPane.showMessageDialog(rootPane, "Usuario incorrecto");
+            }
+            if(txtUsuario.getText().equals(usuario) && pass.equals(contraseña)){
+                InterfazListasAlimentos GUI = new InterfazListasAlimentos();
+            GUI.setVisible(true);
+            }
+        }
+        else{
+            JOptionPane.showMessageDialog(rootPane, "Usuario y constraseña incorrectos");
+        }
+        
+        
+    }//GEN-LAST:event_lblLoginActionPerformed
+
+    private void txtUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtUsuarioMouseClicked
+        txtUsuario.setText("");
+    }//GEN-LAST:event_txtUsuarioMouseClicked
+
+    private void jPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordActionPerformed
+        jPassword.setText("");
+    }//GEN-LAST:event_jPasswordActionPerformed
 
     /**
      * @param args the command line arguments
@@ -82,5 +190,15 @@ public class LOGIN extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPasswordField jPassword;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JLabel lblFondo;
+    private javax.swing.JLabel lblIcono;
+    private javax.swing.JButton lblLogin;
+    private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables
 }
