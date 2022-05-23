@@ -7,6 +7,7 @@ package interfaz;
 
 import Clases.Manzana;
 import Clases.Alimento;
+import Clases.Uva;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import java.util.*;
@@ -21,6 +22,7 @@ import java.awt.event.ItemEvent;
 public class InterfazListasAlimentos extends javax.swing.JFrame {
 
     DefaultListModel fillList = new DefaultListModel();
+    ArrayList <Manzana> listaManzanas = new ArrayList<>();
 
     /**
      * Creates new form InterfazListasAlimentos
@@ -65,6 +67,8 @@ public class InterfazListasAlimentos extends javax.swing.JFrame {
         btnEliminar = new javax.swing.JButton();
         jBtnVerAtb = new javax.swing.JButton();
         lblFondo = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        txtAtributos = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -210,13 +214,23 @@ public class InterfazListasAlimentos extends javax.swing.JFrame {
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, 190, 100));
         getContentPane().add(lblFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 460, 300));
 
+        txtAtributos.setEditable(false);
+        txtAtributos.setColumns(20);
+        txtAtributos.setRows(5);
+        jScrollPane2.setViewportView(txtAtributos);
+
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 280, 200, 110));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAñadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAñadirActionPerformed
-        verificar();
-        llenarAtributos();
-
+        if(verificar()){
+            fillList.addElement(llenarAtributos());
+        } else{
+            JOptionPane.showMessageDialog(rootPane,"El elemento "+cmbObjeto.getSelectedItem().toString() + " no es  " + cmbcategoria.getSelectedItem().toString());
+        }
+        //llenarAtributos();
     }//GEN-LAST:event_btnAñadirActionPerformed
 
     private void cmbcategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbcategoriaActionPerformed
@@ -254,12 +268,7 @@ public class InterfazListasAlimentos extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEditar1ActionPerformed
 
     private void jBtnVerAtbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnVerAtbActionPerformed
-        String mensaje = "";
-        if (rootPaneCheckingEnabled) {
-
-        } else {
-        }
-        jLista.getSelectedValue().toString();
+        mostrarAtributos();
     }//GEN-LAST:event_jBtnVerAtbActionPerformed
 
     /*
@@ -333,53 +342,52 @@ public class InterfazListasAlimentos extends javax.swing.JFrame {
     }
     
     
-    public void verificar() {
-        JOptionPane.showInputDialog(imagen);
+    public boolean verificar() {
+        //JOptionPane.showInputDialog(imagen);
         try {
-            if (cmbObjeto.getSelectedItem().toString().equals("Manzana")
-                    || cmbObjeto.getSelectedItem().toString().equals("Aguacate")
-                    || cmbObjeto.getSelectedItem().toString().equals("Uva")
-                    || cmbObjeto.getSelectedItem().toString().equals("Fresa")) {
-                if (!cmbcategoria.getSelectedItem().toString().equals("Fruta")) {
-                    JOptionPane.showMessageDialog(rootPane,"El item seleccionado " + cmbObjeto.getSelectedItem().toString() + " no es  " + cmbcategoria.getSelectedItem().toString());
-                } else {
-                    fillList.addElement(cmbObjeto.getSelectedItem());
-                }
-
-            }
-            if (cmbObjeto.getSelectedItem().toString().equals("Tomate")
-                    || cmbObjeto.getSelectedItem().toString().equals("Zanahoria")
-                    || cmbObjeto.getSelectedItem().toString().equals("Acelga")
-                    || cmbObjeto.getSelectedItem().toString().equals("Berenjena")) {
-                if (!cmbcategoria.getSelectedItem().toString().equals("Verdura")) {
-                    JOptionPane.showMessageDialog(rootPane,"El item seleccionado " + cmbObjeto.getSelectedItem().toString() + " no es  " + cmbcategoria.getSelectedItem().toString());
-                } else {
-                    fillList.addElement(cmbObjeto.getSelectedItem());
-                }
-            }
-            if (cmbObjeto.getSelectedItem().toString().equals("Aceite")
-                    || cmbObjeto.getSelectedItem().toString().equals("Queso")
-                    || cmbObjeto.getSelectedItem().toString().equals("Pescado")
-                    || cmbObjeto.getSelectedItem().toString().equals("Chocolate")) {
-                if (!cmbcategoria.getSelectedItem().toString().equals("Grasa")) {
-                    JOptionPane.showMessageDialog(rootPane,"El item seleccionado " + cmbObjeto.getSelectedItem().toString() + " no es  " + cmbcategoria.getSelectedItem().toString());
-               } else {
-                    fillList.addElement(cmbObjeto.getSelectedItem());
-                }
-            }
-            if (cmbObjeto.getSelectedItem().toString().equals("Papa")
-                    || cmbObjeto.getSelectedItem().toString().equals("Pasta")
-                    || cmbObjeto.getSelectedItem().toString().equals("Pan")
-                    || cmbObjeto.getSelectedItem().toString().equals("Yuca")) {
-                if (!cmbcategoria.getSelectedItem().toString().equals("Hidratos de Carbono")) {
-                    JOptionPane.showMessageDialog(rootPane,"El item seleccionado " + cmbObjeto.getSelectedItem().toString() + " no es  " + cmbcategoria.getSelectedItem().toString());
-                } else {
-                    fillList.addElement(cmbObjeto.getSelectedItem());
-                }
+            switch (cmbObjeto.getSelectedItem().toString()) {
+                case "Manzana":
+                case "Aguacate":
+                case "Uva":
+                case "Fresa":
+                    if (!cmbcategoria.getSelectedItem().toString().equals("Fruta")) {
+                        return false;
+                    } else {
+                        return true;
+                    }
+                case "Tomate":
+                case "Zanahoria":
+                case "Acelga":
+                case "Berenjena":
+                    if (!cmbcategoria.getSelectedItem().toString().equals("Verdura")) {
+                        return false;
+                    } else {
+                        return true;
+                    }
+                case "Aceite":
+                case "Queso":
+                case "Pescado":
+                case "Chocolate":
+                    if (!cmbcategoria.getSelectedItem().toString().equals("Grasa")) {
+                        return false;
+                    } else {
+                        return true;
+                    }   
+                case "Papa":
+                case "Pasta":
+                case "Pan":
+                case "Yuca":
+                    if (!cmbcategoria.getSelectedItem().toString().equals("Hidratos de Carbono")) {
+                        return false;
+                    } else {
+                        return true;
+                    }  
+                default:
+                    break;
             }
             /*
             if (!cmbObjeto.equals("")) {
-                fillList.addElement(cmbObjeto.getSelectedItem());
+            fillList.addElement(cmbObjeto.getSelectedItem());
             }
             Manzana manzanaVAR = new Manzana((String) cmbObjeto.getSelectedItem());
             listaManzana.add(manzanaVAR);
@@ -387,12 +395,73 @@ public class InterfazListasAlimentos extends javax.swing.JFrame {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(rootPane, e.getMessage());
         }
-
+        return false;
     }
     
-    public void llenarAtributos(){
-        
+    public String llenarAtributos(){
+        String nombreItem="";
+        try{
+            if (cmbcategoria.getSelectedItem().toString().equals("Fruta")){
+                String nombre=JOptionPane.showInputDialog(rootPane, "Nombre: ");
+                float peso=Float.parseFloat(JOptionPane.showInputDialog(rootPane, "Peso: "));
+                int calorias=Integer.parseInt(JOptionPane.showInputDialog(rootPane, "Calorias: "));
+                String forma=JOptionPane.showInputDialog(rootPane, "Forma: ");
+                String tamaño=JOptionPane.showInputDialog(rootPane, "Tamaño ");
+                String color=JOptionPane.showInputDialog(rootPane, "Color: ");
+                if (cmbObjeto.getSelectedItem().toString().equals("Manzana")){
+                        //JOptionPane.showMessageDialog(rootPane, "Enrtesss");
+                        Manzana objManzana = new Manzana(nombre, peso, calorias, forma, tamaño, color);
+                        listaManzanas.add(objManzana);
+                        nombreItem="Manzana - "+objManzana.getNombre();
+                        return nombreItem;
+                }
+                else if (cmbObjeto.getSelectedItem().toString().equals("Uva")){
+                    //Uva objUva = new Uva(nombre, peso, calorias, forma, tamaño, color);
+                    //listaUvas.add(objManzana);
+                    //nombreItem="Uva - "+objUva.getNombre();
+                    //return nombreItem;
+                }
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(rootPane, e.getMessage());
+        }
+        return "Opcion invalida";
     }
+    
+    public void mostrarAtributos(){
+        String texto="";
+        try{
+            //JOptionPane.showMessageDialog(rootPane, "Hola");
+            if(jLista.getSelectedIndex()==-1){
+                JOptionPane.showMessageDialog(rootPane,"No ha seleccionado ningun item");
+            } else{
+                //JOptionPane.showMessageDialog(rootPane, "Entre");
+                if (jLista.getSelectedValue().contains("Manzana")){
+                    //JOptionPane.showMessageDialog(rootPane, "Veo");
+                    for(int i=0; i<listaManzanas.size(); i++){
+                        //JOptionPane.showMessageDialog(rootPane, "For...");
+                        if (jLista.getSelectedValue().contains(listaManzanas.get(i).getNombre())){
+                            //JOptionPane.showMessageDialog(rootPane, "If...");
+                            texto=listaManzanas.get(i).getNombre().toUpperCase()+
+                               "\nPeso: "+String.valueOf(listaManzanas.get(i).getPeso())+
+                               "\nCalorias: "+String.valueOf(listaManzanas.get(i).getCalorias())+
+                               "\nForma:"+listaManzanas.get(i).getForma()+
+                               "\nTamaño: "+listaManzanas.get(i).getTamaño()+
+                               "\nColor: "+listaManzanas.get(i).getColor();
+                            txtAtributos.setText(texto);
+                        }
+                    }
+                } 
+                else{
+                    JOptionPane.showMessageDialog(rootPane, "No veo");
+                } 
+            }
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(rootPane, e.getMessage());
+        }
+    }
+    
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -409,6 +478,8 @@ public class InterfazListasAlimentos extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblFondo;
+    private javax.swing.JTextArea txtAtributos;
     // End of variables declaration//GEN-END:variables
 }
