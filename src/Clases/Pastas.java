@@ -10,5 +10,7 @@ package Clases;
  * @author yanyg
  */
 public interface Pastas {
+    public String presentacion="";
+    
     
 }

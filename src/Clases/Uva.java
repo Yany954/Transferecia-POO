@@ -11,12 +11,11 @@ import javax.swing.JOptionPane;
  *
  * @author yanyg
  */
-public class Manzana extends Frutas_Verduras implements Fruta {
+public class Uva extends Frutas_Verduras implements Fruta {
 
-    public Manzana(String nombre, float peso, int calorias, String forma, String tamaño, String color) {
+    public Uva(String nombre, float peso, int calorias, String forma, String tamaño, String color) {
         super(nombre, peso, calorias, forma, tamaño, color);
     }
-
 
     @Override
     public boolean madurar() {
@@ -35,7 +34,5 @@ public class Manzana extends Frutas_Verduras implements Fruta {
         JOptionPane.showMessageDialog(null, "Cáscara lisa");
         return "Lisa";
     }
-    
-    
-    
+
 }

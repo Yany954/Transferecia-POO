@@ -14,23 +14,28 @@ import Clases.Panes;
 import java.util.*;
 import javax.swing.*;
 import java.awt.*;
+
 public class LOGIN extends javax.swing.JFrame {
+
     public ImageIcon imagen;
     public Icon icono;
-    ArrayList <Manzana> listaAlimentos = new ArrayList<>();
+    ArrayList<Manzana> listaAlimentos = new ArrayList<>();
+
     //aqui inserte los nombres de los demas alimentos, porque recuerda que pueden haber de difernetes formas, sabores y presentaciones
     public LOGIN() {
         initComponents();
-        pintarImagen(lblFondo,"C:\\Users\\yanyg\\OneDrive\\Documentos\\NetBeansProjects\\POO-Transferencia\\src\\imagenes\\ucomfondo.jpg");
-        pintarImagen(lblIcono,"C:\\Users\\yanyg\\OneDrive\\Documentos\\NetBeansProjects\\POO-Transferencia\\src\\imagenes\\compensar.png");
+        pintarImagen(lblFondo, "C:\\Users\\nelly\\OneDrive\\Documentos\\NetBeansProjects\\Transferecia-POO\\src\\imagenes\\ucomfondo.jpg");
+        pintarImagen(lblIcono, "C:\\Users\\nelly\\OneDrive\\Documentos\\NetBeansProjects\\Transferecia-POO\\src\\imagenes\\compensar.png");
     }
-    public void pintarImagen(JLabel label, String ruta){
-        imagen=new ImageIcon(ruta);
-        icono=new ImageIcon(imagen.getImage().getScaledInstance(label.getWidth(), 
+
+    public void pintarImagen(JLabel label, String ruta) {
+        imagen = new ImageIcon(ruta);
+        icono = new ImageIcon(imagen.getImage().getScaledInstance(label.getWidth(),
                 label.getHeight(), Image.SCALE_DEFAULT));
         label.setIcon(this.icono);
         this.repaint();
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -93,10 +98,20 @@ public class LOGIN extends javax.swing.JFrame {
                 txtUsuarioMouseClicked(evt);
             }
         });
+        txtUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtUsuarioActionPerformed(evt);
+            }
+        });
         getContentPane().add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 70, 220, 20));
 
         jPassword.setText("jPasswordField1");
         jPassword.setBorder(null);
+        jPassword.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPasswordMouseClicked(evt);
+            }
+        });
         jPassword.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jPasswordActionPerformed(evt);
@@ -124,26 +139,39 @@ public class LOGIN extends javax.swing.JFrame {
     private void lblLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lblLoginActionPerformed
         //String usuario="sebastian872";
         //String contraseña="poo2022";
-        String usuario="s2";
-        String contraseña="22";
-        String pass = new String(jPassword.getPassword());
-        if(txtUsuario.getText().equals(usuario)|| pass.equals(contraseña)){
-            if(txtUsuario.getText().equals(usuario) && !pass.equals(contraseña)){
-                JOptionPane.showMessageDialog(rootPane, "Contraseña incorrecto");
-            }
-            if(!txtUsuario.getText().equals(usuario) && pass.equals(contraseña)){
-                JOptionPane.showMessageDialog(rootPane, "Usuario incorrecto");
-            }
-            if(txtUsuario.getText().equals(usuario) && pass.equals(contraseña)){
-                InterfazListasAlimentos GUI = new InterfazListasAlimentos();
-            GUI.setVisible(true);
-            }
+        String[] usuario = new String[2];
+        usuario[0] = "s2";
+        usuario[1] = "y9";
+        String[] contraseña = new String[2];
+        contraseña[0] = "22";
+        contraseña[1] = "99";
+
+        String user = new String(txtUsuario.getText());
+        boolean checkUser = false;
+        if (user.compareTo(usuario[0]) == 0 || user.compareTo(usuario[1]) == 0) {
+            checkUser = true;
         }
-        else{
+
+        String pass = new String(jPassword.getPassword());
+        boolean checkPass = false;
+        if (pass.compareTo(contraseña[0]) == 0 || pass.compareTo(contraseña[1]) == 0) {
+            checkPass = true;
+        }
+
+        if (checkUser == true || checkPass == true) {
+            if (checkUser == true && checkPass == false) {
+                JOptionPane.showMessageDialog(rootPane, "Contraseña incorrecta");
+            } else if (checkUser == false && checkPass == true) {
+                JOptionPane.showMessageDialog(rootPane, "Usuario incorrecto");
+            } else if (checkUser == true && checkPass == true) {
+                InterfazListasAlimentos GUI = new InterfazListasAlimentos();
+                GUI.setVisible(true);
+            }
+        } else {
             JOptionPane.showMessageDialog(rootPane, "Usuario y constraseña incorrectos");
         }
-        
-        
+
+
     }//GEN-LAST:event_lblLoginActionPerformed
 
     private void txtUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtUsuarioMouseClicked
@@ -151,8 +179,16 @@ public class LOGIN extends javax.swing.JFrame {
     }//GEN-LAST:event_txtUsuarioMouseClicked
 
     private void jPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordActionPerformed
-        jPassword.setText("");
+
     }//GEN-LAST:event_jPasswordActionPerformed
+
+    private void txtUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsuarioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtUsuarioActionPerformed
+
+    private void jPasswordMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPasswordMouseClicked
+        jPassword.setText("");
+    }//GEN-LAST:event_jPasswordMouseClicked
 
     /**
      * @param args the command line arguments

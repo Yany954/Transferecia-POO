@@ -6,9 +6,13 @@
 package interfaz;
 
 import Clases.Manzana;
+import Clases.Alimento;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListModel;
 import java.util.*;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ItemEvent;
 
 /**
  *
@@ -16,19 +20,23 @@ import java.awt.*;
  */
 public class InterfazListasAlimentos extends javax.swing.JFrame {
 
+    DefaultListModel fillList = new DefaultListModel();
+
     /**
      * Creates new form InterfazListasAlimentos
      */
     public InterfazListasAlimentos() {
         initComponents();
-        pintarImagen(lblFondo,"C:\\Users\\yanyg\\OneDrive\\Documentos\\NetBeansProjects\\POO-Transferencia\\src\\imagenes\\fondoDesk.jpg");
+        pintarImagen(lblFondo, "C:\\Users\\nelly\\OneDrive\\Documentos\\NetBeansProjects\\Transferecia-POO\\src\\imagenes\\fondoDesk.jpg");
+        jLista.setModel(fillList);
+
     }
     public ImageIcon imagen;
     public Icon icono;
-    
-    public void pintarImagen(JLabel label, String ruta){
-        imagen=new ImageIcon(ruta);
-        icono=new ImageIcon(imagen.getImage().getScaledInstance(label.getWidth(), 
+
+    public void pintarImagen(JLabel label, String ruta) {
+        imagen = new ImageIcon(ruta);
+        icono = new ImageIcon(imagen.getImage().getScaledInstance(label.getWidth(),
                 label.getHeight(), Image.SCALE_DEFAULT));
         label.setIcon(this.icono);
         this.repaint();
@@ -44,7 +52,7 @@ public class InterfazListasAlimentos extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        lista = new javax.swing.JList<>();
+        jLista = new javax.swing.JList<>();
         jPanel1 = new javax.swing.JPanel();
         cmbcategoria = new javax.swing.JComboBox<>();
         cmbObjeto = new javax.swing.JComboBox<>();
@@ -55,23 +63,34 @@ public class InterfazListasAlimentos extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         btnEditar1 = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
+        jBtnVerAtb = new javax.swing.JButton();
         lblFondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lista.setFont(new java.awt.Font("Roboto", 0, 11)); // NOI18N
-        jScrollPane1.setViewportView(lista);
+        jLista.setFont(new java.awt.Font("Roboto", 0, 11)); // NOI18N
+        jScrollPane1.setViewportView(jLista);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(272, 28, 140, 240));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 30, 140, 240));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         cmbcategoria.setFont(new java.awt.Font("Roboto", 0, 11)); // NOI18N
         cmbcategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione:", "Fruta", "Verdura", "Grasa", "Hidratos de Carbono", " " }));
+        cmbcategoria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbcategoriaActionPerformed(evt);
+            }
+        });
 
         cmbObjeto.setFont(new java.awt.Font("Roboto", 0, 11)); // NOI18N
-        cmbObjeto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione:", "Manzana", "Aguacate", "Uva", "Tomate", "Aceite", "Queso", "Chocolate", "Pescado", "Papa", "Pasta", "Pan", " ", " " }));
+        cmbObjeto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione...", "Manzana", "Aguacate", "Uva", "Fresa", "Tomate", "Zanahoria", "Acelga", "Berenjena", "Aceite", "Queso", "Chocolate", "Pescado", "Papa", "Pasta", "Pan", "Yuca" }));
+        cmbObjeto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbObjetoActionPerformed(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Roboto Black", 0, 11)); // NOI18N
         jLabel2.setText("CATEGORIA");
@@ -103,7 +122,7 @@ public class InterfazListasAlimentos extends javax.swing.JFrame {
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cmbObjeto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 180, 120));
@@ -127,11 +146,28 @@ public class InterfazListasAlimentos extends javax.swing.JFrame {
         btnEditar1.setFont(new java.awt.Font("Roboto Black", 0, 11)); // NOI18N
         btnEditar1.setForeground(new java.awt.Color(51, 51, 51));
         btnEditar1.setText("Editar");
+        btnEditar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditar1ActionPerformed(evt);
+            }
+        });
 
         btnEliminar.setBackground(new java.awt.Color(255, 153, 51));
         btnEliminar.setFont(new java.awt.Font("Roboto Black", 0, 11)); // NOI18N
         btnEliminar.setForeground(new java.awt.Color(51, 51, 51));
         btnEliminar.setText("Eliminar");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
+        });
+
+        jBtnVerAtb.setText("Ver atributos");
+        jBtnVerAtb.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnVerAtbActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -140,14 +176,16 @@ public class InterfazListasAlimentos extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(btnEditar1, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnEliminar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnEditar1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(28, 28, 28)
+                        .addComponent(btnAñadir, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnAñadir, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(28, 28, 28))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(54, 54, 54))))
+                        .addComponent(jBtnVerAtb)))
+                .addContainerGap())
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -159,12 +197,14 @@ public class InterfazListasAlimentos extends javax.swing.JFrame {
                 .addGap(9, 9, 9)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnAñadir)
-                    .addComponent(btnEditar1))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnEditar1)
+                    .addComponent(btnAñadir))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnEliminar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnEliminar)
+                    .addComponent(jBtnVerAtb))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, 190, 100));
@@ -174,23 +214,89 @@ public class InterfazListasAlimentos extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAñadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAñadirActionPerformed
-       String frutas[]={"Manzana","Uva"};
-       String verduras[]={"Aguacate","Tomate"};
-       String grasa[]={"Aceite","Queso","Chocolate","Pescado"};
-       String Carbohidratos[]={"Papa","Pasta","Pan"};
-        if(cmbcategoria.equals("Fruta")){
-            for (int i = 0; i < frutas.length; i++) {
-                if(!cmbObjeto.equals(frutas[i])){
-                    JOptionPane.showMessageDialog(rootPane, "El alimento seleccionado no es una fruta");
-                }
-                else{
-                    //listaAlimentos.setModel(model);
-                    //model.addElement(new Manzana());
-                }
-            }
-        }
+        verificar();
+        llenarAtributos();
+
     }//GEN-LAST:event_btnAñadirActionPerformed
 
+    private void cmbcategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbcategoriaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbcategoriaActionPerformed
+
+    private void cmbObjetoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbObjetoActionPerformed
+
+    }//GEN-LAST:event_cmbObjetoActionPerformed
+
+    /**/
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        try {
+            if (fillList.isEmpty() == false) {
+                fillList.removeElementAt(jLista.getSelectedIndex());
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "La lista está vacía");
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(rootPane, e);
+        }
+    }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void btnEditar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditar1ActionPerformed
+        try {
+            if (fillList.isEmpty() == false) {
+                fillList.insertElementAt(cmbObjeto.getSelectedItem(), jLista.getSelectedIndex());
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "La lista está vacía");
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(rootPane, e);
+        }
+    }//GEN-LAST:event_btnEditar1ActionPerformed
+
+    private void jBtnVerAtbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnVerAtbActionPerformed
+        String mensaje = "";
+        if (rootPaneCheckingEnabled) {
+
+        } else {
+        }
+        jLista.getSelectedValue().toString();
+    }//GEN-LAST:event_jBtnVerAtbActionPerformed
+
+    /*
+    public String[] food(String categoria) {
+        String[] alimentis = new String[4];
+        switch (categoria) {
+            case "Fruta":
+                alimentis[0] = "Manzana";
+                alimentis[1] = "Aguacate";
+                alimentis[2] = "Uva";
+                alimentis[3] = "Fresa";
+                break;
+            case "Verdura":
+                alimentis[0] = "Tomate";
+                alimentis[1] = "Zanahoria";
+                alimentis[2] = "Acelga";
+                alimentis[3] = "Berenjena";
+                break;
+            case "Grasa":
+                alimentis[0] = "Aceite";
+                alimentis[1] = "Queso";
+                alimentis[2] = "Chocolate";
+                alimentis[3] = "Pescado";
+                break;
+            case "Hidratos de Carbono":
+                alimentis[0] = "Papa";
+                alimentis[1] = "Pasta";
+                alimentis[2] = "Pan";
+                alimentis[3] = "Yuca";
+                break;
+            default:
+                JOptionPane.showMessageDialog(rootPane, "Opción Invalida");
+                break;
+        }
+        return alimentis;
+    }
+     */
     /**
      * @param args the command line arguments
      */
@@ -225,6 +331,69 @@ public class InterfazListasAlimentos extends javax.swing.JFrame {
             }
         });
     }
+    
+    
+    public void verificar() {
+        JOptionPane.showInputDialog(imagen);
+        try {
+            if (cmbObjeto.getSelectedItem().toString().equals("Manzana")
+                    || cmbObjeto.getSelectedItem().toString().equals("Aguacate")
+                    || cmbObjeto.getSelectedItem().toString().equals("Uva")
+                    || cmbObjeto.getSelectedItem().toString().equals("Fresa")) {
+                if (!cmbcategoria.getSelectedItem().toString().equals("Fruta")) {
+                    JOptionPane.showMessageDialog(rootPane,"El item seleccionado " + cmbObjeto.getSelectedItem().toString() + " no es  " + cmbcategoria.getSelectedItem().toString());
+                } else {
+                    fillList.addElement(cmbObjeto.getSelectedItem());
+                }
+
+            }
+            if (cmbObjeto.getSelectedItem().toString().equals("Tomate")
+                    || cmbObjeto.getSelectedItem().toString().equals("Zanahoria")
+                    || cmbObjeto.getSelectedItem().toString().equals("Acelga")
+                    || cmbObjeto.getSelectedItem().toString().equals("Berenjena")) {
+                if (!cmbcategoria.getSelectedItem().toString().equals("Verdura")) {
+                    JOptionPane.showMessageDialog(rootPane,"El item seleccionado " + cmbObjeto.getSelectedItem().toString() + " no es  " + cmbcategoria.getSelectedItem().toString());
+                } else {
+                    fillList.addElement(cmbObjeto.getSelectedItem());
+                }
+            }
+            if (cmbObjeto.getSelectedItem().toString().equals("Aceite")
+                    || cmbObjeto.getSelectedItem().toString().equals("Queso")
+                    || cmbObjeto.getSelectedItem().toString().equals("Pescado")
+                    || cmbObjeto.getSelectedItem().toString().equals("Chocolate")) {
+                if (!cmbcategoria.getSelectedItem().toString().equals("Grasa")) {
+                    JOptionPane.showMessageDialog(rootPane,"El item seleccionado " + cmbObjeto.getSelectedItem().toString() + " no es  " + cmbcategoria.getSelectedItem().toString());
+               } else {
+                    fillList.addElement(cmbObjeto.getSelectedItem());
+                }
+            }
+            if (cmbObjeto.getSelectedItem().toString().equals("Papa")
+                    || cmbObjeto.getSelectedItem().toString().equals("Pasta")
+                    || cmbObjeto.getSelectedItem().toString().equals("Pan")
+                    || cmbObjeto.getSelectedItem().toString().equals("Yuca")) {
+                if (!cmbcategoria.getSelectedItem().toString().equals("Hidratos de Carbono")) {
+                    JOptionPane.showMessageDialog(rootPane,"El item seleccionado " + cmbObjeto.getSelectedItem().toString() + " no es  " + cmbcategoria.getSelectedItem().toString());
+                } else {
+                    fillList.addElement(cmbObjeto.getSelectedItem());
+                }
+            }
+            /*
+            if (!cmbObjeto.equals("")) {
+                fillList.addElement(cmbObjeto.getSelectedItem());
+            }
+            Manzana manzanaVAR = new Manzana((String) cmbObjeto.getSelectedItem());
+            listaManzana.add(manzanaVAR);
+             */
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(rootPane, e.getMessage());
+        }
+
+    }
+    
+    public void llenarAtributos(){
+        
+    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAñadir;
@@ -232,13 +401,14 @@ public class InterfazListasAlimentos extends javax.swing.JFrame {
     private javax.swing.JButton btnEliminar;
     private javax.swing.JComboBox<String> cmbObjeto;
     private javax.swing.JComboBox<String> cmbcategoria;
+    private javax.swing.JButton jBtnVerAtb;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JList<String> jLista;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblFondo;
-    private javax.swing.JList<String> lista;
     // End of variables declaration//GEN-END:variables
 }

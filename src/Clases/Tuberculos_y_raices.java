@@ -10,5 +10,12 @@ package Clases;
  * @author yanyg
  */
 public interface Tuberculos_y_raices {
+  /*  public String forma="";
+    public String tamaño="";
+    public String color="";
+    */
+    public boolean madurar();
+    public int crecer(); 
+    
     
 }
