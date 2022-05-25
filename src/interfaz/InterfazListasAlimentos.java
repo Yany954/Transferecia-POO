@@ -28,7 +28,6 @@ public class InterfazListasAlimentos extends javax.swing.JFrame {
     ArrayList<ObjVerdura> listaVerduras = new ArrayList<>();
     ArrayList<ObjGrasa> listaGrasas = new ArrayList<>();
     ArrayList<ObjCarbHto> listaCarbs = new ArrayList<>();
-    //ArrayList <Uva> listaUvas = new ArrayList<>();
     int error = 0;
     String nombreItem = "";
 
@@ -51,7 +50,6 @@ public class InterfazListasAlimentos extends javax.swing.JFrame {
         label.setIcon(this.icono);
         this.repaint();
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -90,19 +88,9 @@ public class InterfazListasAlimentos extends javax.swing.JFrame {
 
         cmbcategoria.setFont(new java.awt.Font("Roboto", 0, 11)); // NOI18N
         cmbcategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione...", "Fruta", "Verdura", "Grasa", "Hidratos de Carbono", " " }));
-        cmbcategoria.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmbcategoriaActionPerformed(evt);
-            }
-        });
 
         cmbObjeto.setFont(new java.awt.Font("Roboto", 0, 11)); // NOI18N
         cmbObjeto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione...", "Manzana", "Aguacate", "Uva", "Fresa", "Tomate", "Zanahoria", "Acelga", "Berenjena", "Aceite", "Queso", "Chocolate", "Pescado", "Papa", "Pasta", "Pan", "Yuca" }));
-        cmbObjeto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmbObjetoActionPerformed(evt);
-            }
-        });
 
         jLabel2.setFont(new java.awt.Font("Roboto Black", 0, 11)); // NOI18N
         jLabel2.setText("CATEGORIA");
@@ -251,20 +239,15 @@ public class InterfazListasAlimentos extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnAñadirActionPerformed
 
-    private void cmbcategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbcategoriaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cmbcategoriaActionPerformed
-
-    private void cmbObjetoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbObjetoActionPerformed
-
-    }//GEN-LAST:event_cmbObjetoActionPerformed
-
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         try {
             if (jLista.getSelectedIndex() == -1) {
                 JOptionPane.showMessageDialog(rootPane, "No ha seleccionado ningun item", "ERROR", JOptionPane.WARNING_MESSAGE);
             } else {
                 if (fillList.isEmpty() == false) {
+                    //elimina el alimento de la lista de arreglos segun su categoria
+                    eliminarEnArrayLista();
+                    //elimina el elemento de la lista
                     fillList.removeElementAt(jLista.getSelectedIndex());
                 } else {
                     JOptionPane.showMessageDialog(rootPane, "La lista está vacía", "ERROR", JOptionPane.WARNING_MESSAGE);
@@ -276,204 +259,14 @@ public class InterfazListasAlimentos extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnEditar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditar1ActionPerformed
-
-        String texto = "";
-        try {
-            //JOptionPane.showMessageDialog(rootPane, "Hola");
-            if (jLista.getSelectedIndex() == -1) {
+        if (jLista.getSelectedIndex() == -1) {
                 JOptionPane.showMessageDialog(rootPane, "No ha seleccionado ningun item", "ERROR", JOptionPane.WARNING_MESSAGE);
-            } else {
-                //JOptionPane.showMessageDialog(rootPane, "Entre");
-                //Muestro los mismos atributos y comportamientos de las frutas
-                //con este if controlo que tipo de alimento es
-                if (jLista.getSelectedValue().contains("Manzana") || jLista.getSelectedValue().contains("Uva")
-                        || jLista.getSelectedValue().contains("Aguacate") || jLista.getSelectedValue().contains("Fresa")) {
-                    //JOptionPane.showMessageDialog(rootPane, "Veo");
-                    for (int i = 0; i < listaFrutas.size(); i++) { //SE USA DE NUEVO GET PARA QUE USUARIO PUEDA VER ATRIBUTOS MIENTAS EDITA
-                        //JOptionPane.showMessageDialog(rootPane, "For...");
-                        //JOptionPane.showMessageDialog(rootPane, listaFrutas.get(i).getNombre());
-                        if (jLista.getSelectedValue().contains(listaFrutas.get(i).getNombre())) {
-                            //    JOptionPane.showMessageDialog(rootPane, "If...");
-                            texto = listaFrutas.get(i).getNombre().toUpperCase() + "\nATRIBUTOS: "
-                                    + "\nPeso: " + String.valueOf(listaFrutas.get(i).getPeso())
-                                    + "\nCalorias: " + String.valueOf(listaFrutas.get(i).getCalorias())
-                                    + "\nForma:" + listaFrutas.get(i).getForma()
-                                    + "\nTamaño: " + listaFrutas.get(i).getTamaño()
-                                    + "\nColor: " + listaFrutas.get(i).getColor();
-                            txtAtributos.setText(texto);
-                            texto = "";
-                            break;
-                        }
-                    }
-                    for (int i = 0; i < listaFrutas.size(); i++) {
-                        //JOptionPane.showMessageDialog(rootPane, "For...");
-                        //JOptionPane.showMessageDialog(rootPane, listaFrutas.get(i).getNombre());
-                        if (jLista.getSelectedValue().contains(listaFrutas.get(i).getNombre())) {
-                            //    JOptionPane.showMessageDialog(rootPane, "If...");
-                            //String tempNombre = JOptionPane.showInputDialog("Digite el nuevo nombre: ");
-                            //listaFrutas.get(i).setNombre(tempNombre);
-                            float tempPeso = Float.parseFloat(JOptionPane.showInputDialog("Digite el nuevo peso: "));
-                            listaFrutas.get(i).setPeso(tempPeso);
-                            int tempCalorias = Integer.parseInt(JOptionPane.showInputDialog("Digite las nuevas calorias: "));
-                            listaFrutas.get(i).setCalorias(tempCalorias);
-                            String tempForma = JOptionPane.showInputDialog("Digite la nueva forma: ");
-                            listaFrutas.get(i).setForma(tempForma);
-                            String tempTamaño = JOptionPane.showInputDialog("Digite el nuevo tamaño: ");
-                            listaFrutas.get(i).setTamaño(tempTamaño);
-                            String tempColor = JOptionPane.showInputDialog("Digite el nuevo color: ");
-                            listaFrutas.get(i).setColor(tempColor);
-                            texto = listaFrutas.get(i).getNombre().toUpperCase() + "\nATRIBUTOS: "
-                                    + "\nPeso: " + String.valueOf(listaFrutas.get(i).getPeso())
-                                    + "\nCalorias: " + String.valueOf(listaFrutas.get(i).getCalorias())
-                                    + "\nForma:" + listaFrutas.get(i).getForma()
-                                    + "\nTamaño: " + listaFrutas.get(i).getTamaño()
-                                    + "\nColor: " + listaFrutas.get(i).getColor();
-                            txtAtributos.setText(texto);
-                            texto = "";
-                            break;
-                        }
-                    }
-                } else if (jLista.getSelectedValue().contains("Tomate") || jLista.getSelectedValue().contains("Berenjena")
-                        || jLista.getSelectedValue().contains("Zanahoria") || jLista.getSelectedValue().contains("Acelga")) {
-                    //JOptionPane.showMessageDialog(rootPane, "Veo");
-                    for (int i = 0; i < listaVerduras.size(); i++) {
-                        //JOptionPane.showMessageDialog(rootPane, "For...");
-                        //JOptionPane.showMessageDialog(rootPane, listaFrutas.get(i).getNombre());
-                        if (jLista.getSelectedValue().contains(listaVerduras.get(i).getNombre())) {
-                            //    JOptionPane.showMessageDialog(rootPane, "If...");
-                            texto = listaVerduras.get(i).getNombre().toUpperCase() + "\nATRIBUTOS: "
-                                    + "\nPeso: " + String.valueOf(listaVerduras.get(i).getPeso())
-                                    + "\nCalorias: " + String.valueOf(listaVerduras.get(i).getCalorias())
-                                    + "\nForma:" + listaVerduras.get(i).getForma()
-                                    + "\nTamaño: " + listaVerduras.get(i).getTamaño()
-                                    + "\nColor: " + listaVerduras.get(i).getColor();
-                            txtAtributos.setText(texto);
-                            texto = "";
-                            break;
-
-                        }
-                    }
-                    for (int i = 0; i < listaVerduras.size(); i++) {
-                        //JOptionPane.showMessageDialog(rootPane, "For...");
-                        //JOptionPane.showMessageDialog(rootPane, listaFrutas.get(i).getNombre());
-                        if (jLista.getSelectedValue().contains(listaVerduras.get(i).getNombre())) {
-                            //    JOptionPane.showMessageDialog(rootPane, "If...");
-                            //String tempNombre = JOptionPane.showInputDialog("Digite el nuevo nombre: ");
-                            //listaFrutas.get(i).setNombre(tempNombre);
-                            float tempPeso = Float.parseFloat(JOptionPane.showInputDialog("Digite el nuevo peso: "));
-                            listaVerduras.get(i).setPeso(tempPeso);
-                            int tempCalorias = Integer.parseInt(JOptionPane.showInputDialog("Digite las nuevas calorias: "));
-                            listaVerduras.get(i).setCalorias(tempCalorias);
-                            String tempForma = JOptionPane.showInputDialog("Digite la nueva forma: ");
-                            listaVerduras.get(i).setForma(tempForma);
-                            String tempTamaño = JOptionPane.showInputDialog("Digite el nuevo tamaño: ");
-                            listaVerduras.get(i).setTamaño(tempTamaño);
-                            String tempColor = JOptionPane.showInputDialog("Digite el nuevo color: ");
-                            listaVerduras.get(i).setColor(tempColor);
-                            texto = listaVerduras.get(i).getNombre().toUpperCase() + "\nATRIBUTOS: "
-                                    + "\nPeso: " + String.valueOf(listaVerduras.get(i).getPeso())
-                                    + "\nCalorias: " + String.valueOf(listaVerduras.get(i).getCalorias())
-                                    + "\nForma:" + listaVerduras.get(i).getForma()
-                                    + "\nTamaño: " + listaVerduras.get(i).getTamaño()
-                                    + "\nColor: " + listaVerduras.get(i).getColor();
-                            txtAtributos.setText(texto);
-                            texto = "";
-                            break;
-                        }
-                    }
-                } else if (jLista.getSelectedValue().contains("Aceite") || jLista.getSelectedValue().contains("Chocolate")
-                        || jLista.getSelectedValue().contains("Queso") || jLista.getSelectedValue().contains("Pescado")) {
-                    //JOptionPane.showMessageDialog(rootPane, "Veo");
-                    for (int i = 0; i < listaGrasas.size(); i++) {
-                        //JOptionPane.showMessageDialog(rootPane, "For...");
-                        //JOptionPane.showMessageDialog(rootPane, listaFrutas.get(i).getNombre());
-                        if (jLista.getSelectedValue().contains(listaGrasas.get(i).getNombre())) {
-                            //    JOptionPane.showMessageDialog(rootPane, "If...");
-                            texto = listaGrasas.get(i).getNombre().toUpperCase() + "\nATRIBUTOS: "
-                                    + "\nPeso: " + String.valueOf(listaGrasas.get(i).getPeso())
-                                    + "\nCalorias: " + String.valueOf(listaGrasas.get(i).getCalorias())
-                                    + "\nTipo de grasa:" + listaGrasas.get(i).getTipoDeGrasa();
-                            txtAtributos.setText(texto);
-                            texto = "";
-                            break;
-
-                        }
-                    }
-                    for (int i = 0; i < listaGrasas.size(); i++) {
-                        //JOptionPane.showMessageDialog(rootPane, "For...");
-                        //JOptionPane.showMessageDialog(rootPane, listaFrutas.get(i).getNombre());
-                        if (jLista.getSelectedValue().contains(listaGrasas.get(i).getNombre())) {
-                            //    JOptionPane.showMessageDialog(rootPane, "If...");
-                            //String tempNombre = JOptionPane.showInputDialog("Digite el nuevo nombre: ");
-                            //listaFrutas.get(i).setNombre(tempNombre);
-                            float tempPeso = Float.parseFloat(JOptionPane.showInputDialog("Digite el nuevo peso: "));
-                            listaGrasas.get(i).setPeso(tempPeso);
-                            int tempCalorias = Integer.parseInt(JOptionPane.showInputDialog("Digite las nuevas calorias: "));
-                            listaGrasas.get(i).setCalorias(tempCalorias);
-                            String tempTipoGrasa = JOptionPane.showInputDialog("Digite el nuevo tipo de grasa: ");
-                            listaGrasas.get(i).setTipoDeGrasa(tempTipoGrasa);
-                            texto = listaGrasas.get(i).getNombre().toUpperCase() + "\nATRIBUTOS: "
-                                    + "\nPeso: " + String.valueOf(listaGrasas.get(i).getPeso())
-                                    + "\nCalorias: " + String.valueOf(listaGrasas.get(i).getCalorias())
-                                    + "\nTipo de grasa:" + listaGrasas.get(i).getTipoDeGrasa();
-                            txtAtributos.setText(texto);
-                            texto = "";
-                            break;
-                        }
-                    }
-                } else if (jLista.getSelectedValue().contains("Pan") || jLista.getSelectedValue().contains("Pasta")
-                        || jLista.getSelectedValue().contains("Papa") || jLista.getSelectedValue().contains("Yuca")) {
-                    //JOptionPane.showMessageDialog(rootPane, "Veo");
-                    for (int i = 0; i < listaCarbs.size(); i++) {
-                        //JOptionPane.showMessageDialog(rootPane, "For...");
-                        //JOptionPane.showMessageDialog(rootPane, listaFrutas.get(i).getNombre());
-                        if (jLista.getSelectedValue().contains(listaCarbs.get(i).getNombre())) {
-                            //    JOptionPane.showMessageDialog(rootPane, "If...");
-                            texto = listaCarbs.get(i).getNombre().toUpperCase() + "\nATRIBUTOS: "
-                                    + "\nPeso: " + String.valueOf(listaCarbs.get(i).getPeso())
-                                    + "\nCalorias: " + String.valueOf(listaCarbs.get(i).getCalorias())
-                                    + "\nTipo de CarboHidrato:" + listaCarbs.get(i).getTipoDeCarboHidrato();
-                            txtAtributos.setText(texto);
-                            texto = "";
-                            break;
-                        }
-                    }
-                    for (int i = 0; i < listaCarbs.size(); i++) {
-                        //JOptionPane.showMessageDialog(rootPane, "For...");
-                        //JOptionPane.showMessageDialog(rootPane, listaFrutas.get(i).getNombre());
-                        if (jLista.getSelectedValue().contains(listaCarbs.get(i).getNombre())) {
-                            //    JOptionPane.showMessageDialog(rootPane, "If...");
-                            //String tempNombre = JOptionPane.showInputDialog("Digite el nuevo nombre: ");
-                            //listaFrutas.get(i).setNombre(tempNombre);
-                            float tempPeso = Float.parseFloat(JOptionPane.showInputDialog("Digite el nuevo peso: "));
-                            listaCarbs.get(i).setPeso(tempPeso);
-                            int tempCalorias = Integer.parseInt(JOptionPane.showInputDialog("Digite las nuevas calorias: "));
-                            listaCarbs.get(i).setCalorias(tempCalorias);
-                            String tempTipoCarb = JOptionPane.showInputDialog("Digite el nuevo tipo de Carbohidrato: ");
-                            listaCarbs.get(i).setTipoDeCarboHidrato(tempTipoCarb);
-                            texto = listaCarbs.get(i).getNombre().toUpperCase() + "\nATRIBUTOS: "
-                                    + "\nPeso: " + String.valueOf(listaCarbs.get(i).getPeso())
-                                    + "\nCalorias: " + String.valueOf(listaCarbs.get(i).getCalorias())
-                                    + "\nTipo de CarboHidrato:" + listaCarbs.get(i).getTipoDeCarboHidrato();
-                            txtAtributos.setText(texto);
-                            texto = "";
-                            break;
-                        }
-                    }
-                }
-                texto="";
-                /*if (jLista.getSelectedIndex() != -1) {
-                if (fillList.isEmpty() == false) {
-                    fillList.insertElementAt(cmbObjeto.getSelectedItem(), jLista.getSelectedIndex());
-                } else {
-                    JOptionPane.showMessageDialog(rootPane, "La lista está vacía", "ERROR", JOptionPane.WARNING_MESSAGE);
-                }
-            } else {
-                JOptionPane.showMessageDialog(rootPane, "No ha seleccionado ningun item", "ERROR", JOptionPane.WARNING_MESSAGE);
-            }*/
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(rootPane, e);
+        } else {
+            //muesrta los atributos para que el usuario pueda ver los actuales datos del alimento
+            mostrarAtributos();
+            editarAtributos();
+            //muestra el cambio que se hizo en los atributos
+            mostrarAtributos();
         }
     }//GEN-LAST:event_btnEditar1ActionPerformed
 
@@ -565,7 +358,9 @@ public class InterfazListasAlimentos extends javax.swing.JFrame {
     }
 
     public void llenarAtributos() {
+        //sirve para detectar algun error cuando se ingresan datos en los atributos
         error = 0;
+        //inicializa variable global que se usa como parametro en la creacion de un nuevo item de la lista en la interfaz
         nombreItem = "";
         try {
             String nombre = JOptionPane.showInputDialog(rootPane, "Nombre: ");
@@ -579,29 +374,24 @@ public class InterfazListasAlimentos extends javax.swing.JFrame {
 
                 switch (cmbObjeto.getSelectedItem().toString()) {
                     case "Manzana":
-                        //JOptionPane.showMessageDialog(rootPane, "Enrtesss");
                         ObjFruta manzana = new ObjFruta(nombre, peso, calorias, forma, tamaño, color);
                         listaFrutas.add(manzana);
                         nombreItem = "Manzana - " + manzana.getNombre();
-                        //return nombreItem;
                         break;
                     case "Uva":
                         ObjFruta Uva = new ObjFruta(nombre, peso, calorias, forma, tamaño, color);
                         listaFrutas.add(Uva);
                         nombreItem = "Uva - " + Uva.getNombre();
-                        //return nombreItem;
                         break;
                     case "Aguacate":
                         ObjFruta Aguacate = new ObjFruta(nombre, peso, calorias, forma, tamaño, color);
                         listaFrutas.add(Aguacate);
                         nombreItem = "Aguacate - " + Aguacate.getNombre();
-                        //return nombreItem;
                         break;
                     case "Fresa":
                         ObjFruta Fresa = new ObjFruta(nombre, peso, calorias, forma, tamaño, color);
                         listaFrutas.add(Fresa);
                         nombreItem = "Fresa - " + Fresa.getNombre();
-                        //return nombreItem;
                         break;
                     default:
                         break;
@@ -612,25 +402,21 @@ public class InterfazListasAlimentos extends javax.swing.JFrame {
                             ObjVerdura Tomate = new ObjVerdura(nombre, peso, calorias, forma, tamaño, color);
                             listaVerduras.add(Tomate);
                             nombreItem = "Tomate - " + Tomate.getNombre();
-                            //return nombreItem;
                             break;
                         case "Zanahoria":
                             ObjVerdura Zanahoria = new ObjVerdura(nombre, peso, calorias, forma, tamaño, color);
                             listaVerduras.add(Zanahoria);
                             nombreItem = "Zanahoria - " + Zanahoria.getNombre();
-                            //return nombreItem;
                             break;
                         case "Berenjena":
                             ObjVerdura Berenjena = new ObjVerdura(nombre, peso, calorias, forma, tamaño, color);
                             listaVerduras.add(Berenjena);
                             nombreItem = "Berenjena - " + Berenjena.getNombre();
-                            //return nombreItem;
                             break;
                         case "Acelga":
                             ObjVerdura Acelga = new ObjVerdura(nombre, peso, calorias, forma, tamaño, color);
                             listaVerduras.add(Acelga);
                             nombreItem = "Acelga - " + Acelga.getNombre();
-                            //return nombreItem;
                             break;
                         default:
                             break;
@@ -638,70 +424,61 @@ public class InterfazListasAlimentos extends javax.swing.JFrame {
                 }
             }
             if (cmbcategoria.getSelectedItem().toString().equals("Grasa")) {
-                //para que pida los dato de atributos y no tener que repetir las siguientes lineas despues
                 String tipoDeGrasa = JOptionPane.showInputDialog(rootPane, "Tipo de Grasa: ");
                 switch (cmbObjeto.getSelectedItem().toString()) {
                     case "Aceite":
                         ObjGrasa Aceite = new ObjGrasa(nombre, peso, calorias, tipoDeGrasa);
                         listaGrasas.add(Aceite);
                         nombreItem = "Aceite - " + Aceite.getNombre();
-                        //return nombreItem;
                         break;
                     case "Queso":
                         ObjGrasa Queso = new ObjGrasa(nombre, peso, calorias, tipoDeGrasa);
                         listaGrasas.add(Queso);
                         nombreItem = "Queso - " + Queso.getNombre();
-                        //return nombreItem;
                         break;
                     case "Pescado":
                         ObjGrasa Pescado = new ObjGrasa(nombre, peso, calorias, tipoDeGrasa);
                         listaGrasas.add(Pescado);
                         nombreItem = "Pescado - " + Pescado.getNombre();
-                        //return nombreItem;
                         break;
                     case "Chocolate":
                         ObjGrasa Chocolate = new ObjGrasa(nombre, peso, calorias, tipoDeGrasa);
                         listaGrasas.add(Chocolate);
                         nombreItem = "Chocolate - " + Chocolate.getNombre();
-                        //return nombreItem;
                         break;
                     default:
                         break;
                 }
             }
             if (cmbcategoria.getSelectedItem().toString().equals("Hidratos de Carbono")) {
-                //para que pida los dato de atributos y no tener que repetir las siguientes lineas despues
                 String tipoDeCarboHidrato = JOptionPane.showInputDialog(rootPane, "Tipo de CarboHidrato: ");
                 switch (cmbObjeto.getSelectedItem().toString()) {
                     case "Papa":
                         ObjCarbHto Papa = new ObjCarbHto(nombre, peso, calorias, tipoDeCarboHidrato);
                         listaCarbs.add(Papa);
                         nombreItem = "Papa - " + Papa.getNombre();
-                        //return nombreItem;
                         break;
                     case "Pasta":
                         ObjCarbHto Pasta = new ObjCarbHto(nombre, peso, calorias, tipoDeCarboHidrato);
                         listaCarbs.add(Pasta);
                         nombreItem = "Pasta - " + Pasta.getNombre();
-                        //return nombreItem;
                         break;
                     case "Pan":
                         ObjCarbHto Pan = new ObjCarbHto(nombre, peso, calorias, tipoDeCarboHidrato);
                         listaCarbs.add(Pan);
                         nombreItem = "Pan - " + Pan.getNombre();
-                        //return nombreItem;
                         break;
                     case "Yuca":
                         ObjCarbHto Yuca = new ObjCarbHto(nombre, peso, calorias, tipoDeCarboHidrato);
                         listaCarbs.add(Yuca);
                         nombreItem = "Yuca - " + Yuca.getNombre();
-                        //return nombreItem;
                         break;
                     default:
                         break;
                 }
             }
         } catch (Exception e) {
+            //si ocurre alguna excepcion cambia el valor de error a -1
             error = -1;
             JOptionPane.showMessageDialog(rootPane, e.getMessage());
         }
@@ -710,21 +487,18 @@ public class InterfazListasAlimentos extends javax.swing.JFrame {
     public void mostrarAtributos() {
         String texto = "";
         try {
-            //JOptionPane.showMessageDialog(rootPane, "Hola");
             if (jLista.getSelectedIndex() == -1) {
                 JOptionPane.showMessageDialog(rootPane, "No ha seleccionado ningun item", "ERROR", JOptionPane.WARNING_MESSAGE);
             } else {
-                //JOptionPane.showMessageDialog(rootPane, "Entre");
                 //Muestro los mismos atributos y comportamientos de las frutas
                 //con este if controlo que tipo de alimento es
                 if (jLista.getSelectedValue().contains("Manzana") || jLista.getSelectedValue().contains("Uva")
                         || jLista.getSelectedValue().contains("Aguacate") || jLista.getSelectedValue().contains("Fresa")) {
-                    //JOptionPane.showMessageDialog(rootPane, "Veo");
+                    //recorro la lista de arreglo de frutas
                     for (int i = 0; i < listaFrutas.size(); i++) {
-                        //JOptionPane.showMessageDialog(rootPane, "For...");
-                        //JOptionPane.showMessageDialog(rootPane, listaFrutas.get(i).getNombre());
+                        //busco la fruta que tenga el mismo nombre del item seleciconado
                         if (jLista.getSelectedValue().contains(listaFrutas.get(i).getNombre())) {
-                            //    JOptionPane.showMessageDialog(rootPane, "If...");
+                            //concateno en un string los datos del alimento para mostrarlos en el texto de area
                             texto = listaFrutas.get(i).getNombre().toUpperCase() + "\nATRIBUTOS: "
                                     + "\nPeso: " + String.valueOf(listaFrutas.get(i).getPeso())
                                     + "\nCalorias: " + String.valueOf(listaFrutas.get(i).getCalorias())
@@ -736,11 +510,8 @@ public class InterfazListasAlimentos extends javax.swing.JFrame {
                     }
                 } else if (jLista.getSelectedValue().contains("Tomate") || jLista.getSelectedValue().contains("Zanahoria")
                         || jLista.getSelectedValue().contains("Acelga") || jLista.getSelectedValue().contains("Berenjena")) {
-                    //JOptionPane.showMessageDialog(rootPane, "Veo");
                     for (int i = 0; i < listaVerduras.size(); i++) {
-                        //JOptionPane.showMessageDialog(rootPane, "For...");
                         if (jLista.getSelectedValue().contains(listaVerduras.get(i).getNombre())) {
-                            //JOptionPane.showMessageDialog(rootPane, "If...");
                             texto = listaVerduras.get(i).getNombre().toUpperCase() + "\nATRIBUTOS: "
                                     + "\nPeso: " + String.valueOf(listaVerduras.get(i).getPeso())
                                     + "\nCalorias: " + String.valueOf(listaVerduras.get(i).getCalorias())
@@ -752,11 +523,8 @@ public class InterfazListasAlimentos extends javax.swing.JFrame {
                     }
                 } else if (jLista.getSelectedValue().contains("Aceite") || jLista.getSelectedValue().contains("Chocolate")
                         || jLista.getSelectedValue().contains("Queso") || jLista.getSelectedValue().contains("Pescado")) {
-                    //JOptionPane.showMessageDialog(rootPane, "Veo");
                     for (int i = 0; i < listaGrasas.size(); i++) {
-                        //JOptionPane.showMessageDialog(rootPane, "For...");
                         if (jLista.getSelectedValue().contains(listaGrasas.get(i).getNombre())) {
-                            //JOptionPane.showMessageDialog(rootPane, "If...");
                             texto = listaGrasas.get(i).getNombre().toUpperCase() + "\nATRIBUTOS: "
                                     + "\nPeso: " + String.valueOf(listaGrasas.get(i).getPeso())
                                     + "\nCalorias: " + String.valueOf(listaGrasas.get(i).getCalorias())
@@ -766,11 +534,8 @@ public class InterfazListasAlimentos extends javax.swing.JFrame {
                     }
                 } else if (jLista.getSelectedValue().contains("Papa") || jLista.getSelectedValue().contains("Pasta")
                         || jLista.getSelectedValue().contains("Pan") || jLista.getSelectedValue().contains("Yuca")) {
-                    //JOptionPane.showMessageDialog(rootPane, "Veo");
                     for (int i = 0; i < listaCarbs.size(); i++) {
-                        //JOptionPane.showMessageDialog(rootPane, "For...");
                         if (jLista.getSelectedValue().contains(listaCarbs.get(i).getNombre())) {
-                            //JOptionPane.showMessageDialog(rootPane, "If...");
                             texto = listaCarbs.get(i).getNombre().toUpperCase() + "\nATRIBUTOS: "
                                     + "\nPeso: " + String.valueOf(listaCarbs.get(i).getPeso())
                                     + "\nCalorias: " + String.valueOf(listaCarbs.get(i).getCalorias())
@@ -785,6 +550,146 @@ public class InterfazListasAlimentos extends javax.swing.JFrame {
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(rootPane, e.getMessage());
+        }
+    }
+    public void editarAtributos(){
+         String texto = "";
+        try {
+            //Muestro los mismos atributos y comportamientos de las frutas
+            //con este if controlo que tipo de alimento es
+            if (jLista.getSelectedValue().contains("Manzana") || jLista.getSelectedValue().contains("Uva")
+                        || jLista.getSelectedValue().contains("Aguacate") || jLista.getSelectedValue().contains("Fresa")) {
+                for (int i = 0; i < listaFrutas.size(); i++) {
+                    if (jLista.getSelectedValue().contains(listaFrutas.get(i).getNombre())) {
+                        float tempPeso = Float.parseFloat(JOptionPane.showInputDialog("Digite el nuevo peso: "));
+                        listaFrutas.get(i).setPeso(tempPeso);
+                        int tempCalorias = Integer.parseInt(JOptionPane.showInputDialog("Digite las nuevas calorias: "));
+                        listaFrutas.get(i).setCalorias(tempCalorias);
+                        String tempForma = JOptionPane.showInputDialog("Digite la nueva forma: ");
+                        listaFrutas.get(i).setForma(tempForma);
+                        String tempTamaño = JOptionPane.showInputDialog("Digite el nuevo tamaño: ");
+                        listaFrutas.get(i).setTamaño(tempTamaño);
+                        String tempColor = JOptionPane.showInputDialog("Digite el nuevo color: ");
+                        listaFrutas.get(i).setColor(tempColor);
+                        texto = listaFrutas.get(i).getNombre().toUpperCase() + "\nATRIBUTOS: "
+                                + "\nPeso: " + String.valueOf(listaFrutas.get(i).getPeso())
+                                + "\nCalorias: " + String.valueOf(listaFrutas.get(i).getCalorias())
+                                + "\nForma:" + listaFrutas.get(i).getForma()
+                                + "\nTamaño: " + listaFrutas.get(i).getTamaño()
+                                + "\nColor: " + listaFrutas.get(i).getColor();
+                        txtAtributos.setText(texto);
+                        texto = "";
+                        //para que se salga del ciclo ya que encontro el item, no es necesario buscar mas
+                        break;
+                    }
+                }
+            } else if (jLista.getSelectedValue().contains("Tomate") || jLista.getSelectedValue().contains("Berenjena")
+                    || jLista.getSelectedValue().contains("Zanahoria") || jLista.getSelectedValue().contains("Acelga")) {
+                for (int i = 0; i < listaVerduras.size(); i++) {
+                    if (jLista.getSelectedValue().contains(listaVerduras.get(i).getNombre())) {
+                        float tempPeso = Float.parseFloat(JOptionPane.showInputDialog("Digite el nuevo peso: "));
+                        listaVerduras.get(i).setPeso(tempPeso);
+                        int tempCalorias = Integer.parseInt(JOptionPane.showInputDialog("Digite las nuevas calorias: "));
+                        listaVerduras.get(i).setCalorias(tempCalorias);
+                        String tempForma = JOptionPane.showInputDialog("Digite la nueva forma: ");
+                        listaVerduras.get(i).setForma(tempForma);
+                        String tempTamaño = JOptionPane.showInputDialog("Digite el nuevo tamaño: ");
+                        listaVerduras.get(i).setTamaño(tempTamaño);
+                        String tempColor = JOptionPane.showInputDialog("Digite el nuevo color: ");
+                        listaVerduras.get(i).setColor(tempColor);
+                        texto = listaVerduras.get(i).getNombre().toUpperCase() + "\nATRIBUTOS: "
+                                + "\nPeso: " + String.valueOf(listaVerduras.get(i).getPeso())
+                                + "\nCalorias: " + String.valueOf(listaVerduras.get(i).getCalorias())
+                                + "\nForma:" + listaVerduras.get(i).getForma()
+                                + "\nTamaño: " + listaVerduras.get(i).getTamaño()
+                                + "\nColor: " + listaVerduras.get(i).getColor();
+                        txtAtributos.setText(texto);
+                        texto = "";
+                        break;
+                    }
+                }
+            } else if (jLista.getSelectedValue().contains("Aceite") || jLista.getSelectedValue().contains("Chocolate")
+                    || jLista.getSelectedValue().contains("Queso") || jLista.getSelectedValue().contains("Pescado")) {
+                for (int i = 0; i < listaGrasas.size(); i++) {
+                    if (jLista.getSelectedValue().contains(listaGrasas.get(i).getNombre())) {
+                        float tempPeso = Float.parseFloat(JOptionPane.showInputDialog("Digite el nuevo peso: "));
+                        listaGrasas.get(i).setPeso(tempPeso);
+                        int tempCalorias = Integer.parseInt(JOptionPane.showInputDialog("Digite las nuevas calorias: "));
+                        listaGrasas.get(i).setCalorias(tempCalorias);
+                        String tempTipoGrasa = JOptionPane.showInputDialog("Digite el nuevo tipo de grasa: ");
+                        listaGrasas.get(i).setTipoDeGrasa(tempTipoGrasa);
+                        texto = listaGrasas.get(i).getNombre().toUpperCase() + "\nATRIBUTOS: "
+                                + "\nPeso: " + String.valueOf(listaGrasas.get(i).getPeso())
+                                + "\nCalorias: " + String.valueOf(listaGrasas.get(i).getCalorias())
+                                + "\nTipo de grasa:" + listaGrasas.get(i).getTipoDeGrasa();
+                        txtAtributos.setText(texto);
+                        texto = "";
+                        break;
+                    }
+                }
+            } else if (jLista.getSelectedValue().contains("Pan") || jLista.getSelectedValue().contains("Pasta")
+                        || jLista.getSelectedValue().contains("Papa") || jLista.getSelectedValue().contains("Yuca")) {
+                for (int i = 0; i < listaCarbs.size(); i++) {
+                    if (jLista.getSelectedValue().contains(listaCarbs.get(i).getNombre())) {
+                        float tempPeso = Float.parseFloat(JOptionPane.showInputDialog("Digite el nuevo peso: "));
+                        listaCarbs.get(i).setPeso(tempPeso);
+                        int tempCalorias = Integer.parseInt(JOptionPane.showInputDialog("Digite las nuevas calorias: "));
+                        listaCarbs.get(i).setCalorias(tempCalorias);
+                        String tempTipoCarb = JOptionPane.showInputDialog("Digite el nuevo tipo de Carbohidrato: ");
+                        listaCarbs.get(i).setTipoDeCarboHidrato(tempTipoCarb);
+                        texto = listaCarbs.get(i).getNombre().toUpperCase() + "\nATRIBUTOS: "
+                                + "\nPeso: " + String.valueOf(listaCarbs.get(i).getPeso())
+                                + "\nCalorias: " + String.valueOf(listaCarbs.get(i).getCalorias())
+                                + "\nTipo de CarboHidrato:" + listaCarbs.get(i).getTipoDeCarboHidrato();
+                        txtAtributos.setText(texto);
+                        texto = "";
+                        break;
+                    }
+                }
+            }
+            texto="";
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(rootPane, e);
+        }
+    }
+    public void eliminarEnArrayLista(){
+        try{
+            if (jLista.getSelectedValue().contains("Manzana") || jLista.getSelectedValue().contains("Uva")
+                    || jLista.getSelectedValue().contains("Aguacate") || jLista.getSelectedValue().contains("Fresa")) {
+                for (int i = 0; i < listaFrutas.size(); i++) {
+                    if (jLista.getSelectedValue().contains(listaFrutas.get(i).getNombre())) {
+                        listaFrutas.remove(i);
+                        //elimina la informacion mostrada en el area de texto de la interfaz
+                        txtAtributos.setText("");
+                    }
+                }
+            } else if (jLista.getSelectedValue().contains("Tomate") || jLista.getSelectedValue().contains("Berenjena")
+                    || jLista.getSelectedValue().contains("Zanahoria") || jLista.getSelectedValue().contains("Acelga")) {
+                for (int i = 0; i < listaVerduras.size(); i++) {
+                    if (jLista.getSelectedValue().contains(listaVerduras.get(i).getNombre())) {
+                        listaVerduras.remove(i);
+                        txtAtributos.setText("");
+                    }
+                }
+            } else if (jLista.getSelectedValue().contains("Aceite") || jLista.getSelectedValue().contains("Chocolate")
+                        || jLista.getSelectedValue().contains("Queso") || jLista.getSelectedValue().contains("Pescado")) {
+                for (int i = 0; i < listaGrasas.size(); i++) {
+                    if (jLista.getSelectedValue().contains(listaGrasas.get(i).getNombre())) {
+                        listaGrasas.remove(i);
+                        txtAtributos.setText("");
+                    }
+                }
+            } else if (jLista.getSelectedValue().contains("Pan") || jLista.getSelectedValue().contains("Pasta")
+                        || jLista.getSelectedValue().contains("Papa") || jLista.getSelectedValue().contains("Yuca")) {
+                for (int i = 0; i < listaCarbs.size(); i++) {
+                    if (jLista.getSelectedValue().contains(listaCarbs.get(i).getNombre())) {
+                        listaCarbs.remove(i);
+                        txtAtributos.setText("");
+                    }
+                }
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(rootPane, e);
         }
     }
 
