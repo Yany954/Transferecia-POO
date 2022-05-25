@@ -7,7 +7,7 @@ package Clases;
 
 /**
  *
- * @author yanyg
+ * @author Yany Gonzalez & Sebastian Pineda
  */
 public abstract class Hidratos_de_carbono extends Alimento {
     public String tipoDeCarboHidrato="";

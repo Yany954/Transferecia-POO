@@ -6,10 +6,11 @@ package Clases;
 
 /**
  *
- * @author nelly
+ * @author Yany Gonzalez & Sebastian Pineda
  */
-public interface Fruta {
-    
-    public String tipoCascara();
-    
+public interface GrupoA {
+
+    public String tipoSuperficie();
+
+    public boolean listoParaConsumo();
 }

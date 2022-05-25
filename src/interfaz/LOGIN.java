@@ -7,10 +7,9 @@ package interfaz;
 
 /**
  *
- * @author yanyg
+ * @author Yany Gonzalez & Sebastian Pineda
  */
-import Clases.Manzana;
-import Clases.Panes;
+
 import java.util.*;
 import javax.swing.*;
 import java.awt.*;
@@ -19,9 +18,7 @@ public class LOGIN extends javax.swing.JFrame {
 
     public ImageIcon imagen;
     public Icon icono;
-    ArrayList<Manzana> listaAlimentos = new ArrayList<>();
 
-    //aqui inserte los nombres de los demas alimentos, porque recuerda que pueden haber de difernetes formas, sabores y presentaciones
     public LOGIN() {
         initComponents();
         pintarImagen(lblFondo, "C:\\Users\\nelly\\OneDrive\\Documentos\\NetBeansProjects\\Transferecia-POO\\src\\imagenes\\ucomfondo.jpg");
@@ -137,8 +134,6 @@ public class LOGIN extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void lblLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lblLoginActionPerformed
-        //String usuario="sebastian872";
-        //String contraseña="poo2022";
         String[] usuario = new String[2];
         usuario[0] = "s2";
         usuario[1] = "y9";

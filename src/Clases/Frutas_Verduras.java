@@ -7,7 +7,7 @@ package Clases;
 
 /**
  *
- * @author yanyg
+ * @author Yany Gonzalez & Sebastian Pineda
  */
 public abstract class Frutas_Verduras extends Alimento {
 
@@ -51,5 +51,4 @@ public abstract class Frutas_Verduras extends Alimento {
 
     public abstract int crecer();
     
-       
 }

@@ -7,21 +7,22 @@ package Clases;
 
 /**
  *
- * @author yanyg
+ * @author Yany Gonzalez & Sebastian Pineda
  */
 public abstract class Alimento {
+
     String nombre;
     float peso;
-    int calorias; 
-    
+    int calorias;
+
     public Alimento(String nombre, float peso, int calorias) {
         this.nombre = nombre;
         this.peso = peso;
         this.calorias = calorias;
     }
-    
+
     public String getNombre() {
-        return nombre;    
+        return nombre;
     }
 
     public void setNombre(String nombre) {
@@ -44,11 +45,10 @@ public abstract class Alimento {
         this.calorias = calorias;
     }
 
-    
-    public void Nutrir(){
+    public void nutrir() {
     }
-    
-    public void Descomponerse() {    
-    }   
-  
+
+    public void descomponerse() {
+    }
+
 }

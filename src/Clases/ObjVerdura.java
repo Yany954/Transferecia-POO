@@ -11,12 +11,13 @@ import javax.swing.JOptionPane;
  *
  * @author Yany Gonzalez & Sebastian Pineda
  */
-public class ObjFruta extends Frutas_Verduras implements GrupoA {
+public class ObjVerdura extends Frutas_Verduras implements GrupoA {
 
-    public ObjFruta(String nombre, float peso, int calorias, String forma, String tamaño, String color) {
+    public ObjVerdura(String nombre, float peso, int calorias, String forma, String tamaño, String color) {
         super(nombre, peso, calorias, forma, tamaño, color);
     }
 
+    
     @Override
     public int crecer() {
         JOptionPane.showMessageDialog(null, "Creciendo");

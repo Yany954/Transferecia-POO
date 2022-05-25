@@ -11,22 +11,17 @@ import javax.swing.JOptionPane;
  *
  * @author Yany Gonzalez & Sebastian Pineda
  */
-public class ObjFruta extends Frutas_Verduras implements GrupoA {
+public class ObjCarbHto extends Hidratos_de_carbono implements GrupoB {
 
-    public ObjFruta(String nombre, float peso, int calorias, String forma, String tamaño, String color) {
-        super(nombre, peso, calorias, forma, tamaño, color);
+    public ObjCarbHto(String nombre, float peso, int calorias, String tipoDeCarboHidrato) {
+        super(nombre, peso, calorias, tipoDeCarboHidrato);
     }
 
     @Override
-    public int crecer() {
-        JOptionPane.showMessageDialog(null, "Creciendo");
-        return (10);
-    }
-
-    @Override
-    public boolean madurar() {
-        JOptionPane.showMessageDialog(null, "Madurando");
-        return true;
+    public boolean aportarEnergia() {
+        boolean energizar = true;
+        JOptionPane.showMessageDialog(null, "Aporta energia: " + energizar);
+        return energizar;
     }
 
     @Override
@@ -40,16 +35,17 @@ public class ObjFruta extends Frutas_Verduras implements GrupoA {
     }
 
     @Override
-    public String tipoSuperficie() {
-        JOptionPane.showMessageDialog(null, "Cáscara");
-        return "cascara";
+    public String tipoEmpaque() { //input
+        String empaque = "";
+        JOptionPane.showMessageDialog(null, "Tipo de empaque: " + empaque);
+        return empaque;
     }
 
     @Override
-    public boolean listoParaConsumo() {
-        boolean consumir=true;
+    public boolean listoParaConsumo() {// input
+        boolean consumir = false;
         JOptionPane.showMessageDialog(null, "Listo para consumo: " + consumir);
         return consumir;
     }
-    
+
 }

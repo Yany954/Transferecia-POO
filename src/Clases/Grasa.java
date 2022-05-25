@@ -7,11 +7,11 @@ package Clases;
 
 /**
  *
- * @author yanyg
+ * @author Yany Gonzalez & Sebastian Pineda
  */
 public abstract class Grasa extends Alimento {
 
-    public String tipoDeGrasa = "";
+    public String tipoDeGrasa;
 
     public Grasa(String nombre, float peso, int calorias, String tipoDeGrasa) {
         super(nombre, peso, calorias);
@@ -30,7 +30,5 @@ public abstract class Grasa extends Alimento {
     public abstract boolean reservarEnergia();
 
     public abstract boolean insolubilidad();
-
-    public abstract boolean fundirseAlCalor();
 
 }
