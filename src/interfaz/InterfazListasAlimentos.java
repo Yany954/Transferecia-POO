@@ -301,6 +301,8 @@ public class InterfazListasAlimentos extends javax.swing.JFrame {
                                     + "\nTamaño: " + listaFrutas.get(i).getTamaño()
                                     + "\nColor: " + listaFrutas.get(i).getColor();
                             txtAtributos.setText(texto);
+                            texto = "";
+                            break;
                         }
                     }
                     for (int i = 0; i < listaFrutas.size(); i++) {
@@ -327,6 +329,8 @@ public class InterfazListasAlimentos extends javax.swing.JFrame {
                                     + "\nTamaño: " + listaFrutas.get(i).getTamaño()
                                     + "\nColor: " + listaFrutas.get(i).getColor();
                             txtAtributos.setText(texto);
+                            texto = "";
+                            break;
                         }
                     }
                 } else if (jLista.getSelectedValue().contains("Tomate") || jLista.getSelectedValue().contains("Berenjena")
@@ -344,6 +348,8 @@ public class InterfazListasAlimentos extends javax.swing.JFrame {
                                     + "\nTamaño: " + listaVerduras.get(i).getTamaño()
                                     + "\nColor: " + listaVerduras.get(i).getColor();
                             txtAtributos.setText(texto);
+                            texto = "";
+                            break;
 
                         }
                     }
@@ -371,6 +377,8 @@ public class InterfazListasAlimentos extends javax.swing.JFrame {
                                     + "\nTamaño: " + listaVerduras.get(i).getTamaño()
                                     + "\nColor: " + listaVerduras.get(i).getColor();
                             txtAtributos.setText(texto);
+                            texto = "";
+                            break;
                         }
                     }
                 } else if (jLista.getSelectedValue().contains("Aceite") || jLista.getSelectedValue().contains("Chocolate")
@@ -386,6 +394,8 @@ public class InterfazListasAlimentos extends javax.swing.JFrame {
                                     + "\nCalorias: " + String.valueOf(listaGrasas.get(i).getCalorias())
                                     + "\nTipo de grasa:" + listaGrasas.get(i).getTipoDeGrasa();
                             txtAtributos.setText(texto);
+                            texto = "";
+                            break;
 
                         }
                     }
@@ -402,11 +412,13 @@ public class InterfazListasAlimentos extends javax.swing.JFrame {
                             listaGrasas.get(i).setCalorias(tempCalorias);
                             String tempTipoGrasa = JOptionPane.showInputDialog("Digite el nuevo tipo de grasa: ");
                             listaGrasas.get(i).setTipoDeGrasa(tempTipoGrasa);
-                            texto = listaVerduras.get(i).getNombre().toUpperCase() + "\nATRIBUTOS: "
-                                    + "\nPeso: " + String.valueOf(listaVerduras.get(i).getPeso())
-                                    + "\nCalorias: " + String.valueOf(listaVerduras.get(i).getCalorias())
+                            texto = listaGrasas.get(i).getNombre().toUpperCase() + "\nATRIBUTOS: "
+                                    + "\nPeso: " + String.valueOf(listaGrasas.get(i).getPeso())
+                                    + "\nCalorias: " + String.valueOf(listaGrasas.get(i).getCalorias())
                                     + "\nTipo de grasa:" + listaGrasas.get(i).getTipoDeGrasa();
                             txtAtributos.setText(texto);
+                            texto = "";
+                            break;
                         }
                     }
                 } else if (jLista.getSelectedValue().contains("Pan") || jLista.getSelectedValue().contains("Pasta")
@@ -422,7 +434,8 @@ public class InterfazListasAlimentos extends javax.swing.JFrame {
                                     + "\nCalorias: " + String.valueOf(listaCarbs.get(i).getCalorias())
                                     + "\nTipo de CarboHidrato:" + listaCarbs.get(i).getTipoDeCarboHidrato();
                             txtAtributos.setText(texto);
-
+                            texto = "";
+                            break;
                         }
                     }
                     for (int i = 0; i < listaCarbs.size(); i++) {
@@ -436,16 +449,19 @@ public class InterfazListasAlimentos extends javax.swing.JFrame {
                             listaCarbs.get(i).setPeso(tempPeso);
                             int tempCalorias = Integer.parseInt(JOptionPane.showInputDialog("Digite las nuevas calorias: "));
                             listaCarbs.get(i).setCalorias(tempCalorias);
-                            String tempTipoGrasa = JOptionPane.showInputDialog("Digite el nuevo tipo de Carbohidrato: ");
-                            listaCarbs.get(i).setTipoDeCarboHidrato(tempTipoGrasa);
+                            String tempTipoCarb = JOptionPane.showInputDialog("Digite el nuevo tipo de Carbohidrato: ");
+                            listaCarbs.get(i).setTipoDeCarboHidrato(tempTipoCarb);
                             texto = listaCarbs.get(i).getNombre().toUpperCase() + "\nATRIBUTOS: "
                                     + "\nPeso: " + String.valueOf(listaCarbs.get(i).getPeso())
                                     + "\nCalorias: " + String.valueOf(listaCarbs.get(i).getCalorias())
                                     + "\nTipo de CarboHidrato:" + listaCarbs.get(i).getTipoDeCarboHidrato();
                             txtAtributos.setText(texto);
+                            texto = "";
+                            break;
                         }
                     }
                 }
+                texto="";
                 /*if (jLista.getSelectedIndex() != -1) {
                 if (fillList.isEmpty() == false) {
                     fillList.insertElementAt(cmbObjeto.getSelectedItem(), jLista.getSelectedIndex());
@@ -658,26 +674,26 @@ public class InterfazListasAlimentos extends javax.swing.JFrame {
                 String tipoDeCarboHidrato = JOptionPane.showInputDialog(rootPane, "Tipo de CarboHidrato: ");
                 switch (cmbObjeto.getSelectedItem().toString()) {
                     case "Papa":
-                        ObjGrasa Papa = new ObjGrasa(nombre, peso, calorias, tipoDeCarboHidrato);
-                        listaGrasas.add(Papa);
+                        ObjCarbHto Papa = new ObjCarbHto(nombre, peso, calorias, tipoDeCarboHidrato);
+                        listaCarbs.add(Papa);
                         nombreItem = "Papa - " + Papa.getNombre();
                         //return nombreItem;
                         break;
                     case "Pasta":
-                        ObjGrasa Pasta = new ObjGrasa(nombre, peso, calorias, tipoDeCarboHidrato);
-                        listaGrasas.add(Pasta);
+                        ObjCarbHto Pasta = new ObjCarbHto(nombre, peso, calorias, tipoDeCarboHidrato);
+                        listaCarbs.add(Pasta);
                         nombreItem = "Pasta - " + Pasta.getNombre();
                         //return nombreItem;
                         break;
                     case "Pan":
-                        ObjGrasa Pan = new ObjGrasa(nombre, peso, calorias, tipoDeCarboHidrato);
-                        listaGrasas.add(Pan);
+                        ObjCarbHto Pan = new ObjCarbHto(nombre, peso, calorias, tipoDeCarboHidrato);
+                        listaCarbs.add(Pan);
                         nombreItem = "Pan - " + Pan.getNombre();
                         //return nombreItem;
                         break;
                     case "Yuca":
-                        ObjGrasa Yuca = new ObjGrasa(nombre, peso, calorias, tipoDeCarboHidrato);
-                        listaGrasas.add(Yuca);
+                        ObjCarbHto Yuca = new ObjCarbHto(nombre, peso, calorias, tipoDeCarboHidrato);
+                        listaCarbs.add(Yuca);
                         nombreItem = "Yuca - " + Yuca.getNombre();
                         //return nombreItem;
                         break;
