@@ -571,14 +571,6 @@ public class InterfazListasAlimentos extends javax.swing.JFrame {
                         listaFrutas.get(i).setTamaño(tempTamaño);
                         String tempColor = JOptionPane.showInputDialog("Digite el nuevo color: ");
                         listaFrutas.get(i).setColor(tempColor);
-                        texto = listaFrutas.get(i).getNombre().toUpperCase() + "\nATRIBUTOS: "
-                                + "\nPeso: " + String.valueOf(listaFrutas.get(i).getPeso())
-                                + "\nCalorias: " + String.valueOf(listaFrutas.get(i).getCalorias())
-                                + "\nForma:" + listaFrutas.get(i).getForma()
-                                + "\nTamaño: " + listaFrutas.get(i).getTamaño()
-                                + "\nColor: " + listaFrutas.get(i).getColor();
-                        txtAtributos.setText(texto);
-                        texto = "";
                         //para que se salga del ciclo ya que encontro el item, no es necesario buscar mas
                         break;
                     }
@@ -597,14 +589,6 @@ public class InterfazListasAlimentos extends javax.swing.JFrame {
                         listaVerduras.get(i).setTamaño(tempTamaño);
                         String tempColor = JOptionPane.showInputDialog("Digite el nuevo color: ");
                         listaVerduras.get(i).setColor(tempColor);
-                        texto = listaVerduras.get(i).getNombre().toUpperCase() + "\nATRIBUTOS: "
-                                + "\nPeso: " + String.valueOf(listaVerduras.get(i).getPeso())
-                                + "\nCalorias: " + String.valueOf(listaVerduras.get(i).getCalorias())
-                                + "\nForma:" + listaVerduras.get(i).getForma()
-                                + "\nTamaño: " + listaVerduras.get(i).getTamaño()
-                                + "\nColor: " + listaVerduras.get(i).getColor();
-                        txtAtributos.setText(texto);
-                        texto = "";
                         break;
                     }
                 }
@@ -618,12 +602,6 @@ public class InterfazListasAlimentos extends javax.swing.JFrame {
                         listaGrasas.get(i).setCalorias(tempCalorias);
                         String tempTipoGrasa = JOptionPane.showInputDialog("Digite el nuevo tipo de grasa: ");
                         listaGrasas.get(i).setTipoDeGrasa(tempTipoGrasa);
-                        texto = listaGrasas.get(i).getNombre().toUpperCase() + "\nATRIBUTOS: "
-                                + "\nPeso: " + String.valueOf(listaGrasas.get(i).getPeso())
-                                + "\nCalorias: " + String.valueOf(listaGrasas.get(i).getCalorias())
-                                + "\nTipo de grasa:" + listaGrasas.get(i).getTipoDeGrasa();
-                        txtAtributos.setText(texto);
-                        texto = "";
                         break;
                     }
                 }
@@ -637,12 +615,6 @@ public class InterfazListasAlimentos extends javax.swing.JFrame {
                         listaCarbs.get(i).setCalorias(tempCalorias);
                         String tempTipoCarb = JOptionPane.showInputDialog("Digite el nuevo tipo de Carbohidrato: ");
                         listaCarbs.get(i).setTipoDeCarboHidrato(tempTipoCarb);
-                        texto = listaCarbs.get(i).getNombre().toUpperCase() + "\nATRIBUTOS: "
-                                + "\nPeso: " + String.valueOf(listaCarbs.get(i).getPeso())
-                                + "\nCalorias: " + String.valueOf(listaCarbs.get(i).getCalorias())
-                                + "\nTipo de CarboHidrato:" + listaCarbs.get(i).getTipoDeCarboHidrato();
-                        txtAtributos.setText(texto);
-                        texto = "";
                         break;
                     }
                 }
